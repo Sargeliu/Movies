@@ -1,12 +1,20 @@
 package com.example.movies;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Movie {
 
+    @SerializedName("id")
     private int id;
+    @SerializedName("year")
     private int year;
+    @SerializedName("name")
     private String name;
+    @SerializedName("description")
     private String description;
+    @SerializedName("poster")
     private Poster poster;
+    @SerializedName("rating")
     private Rating rating;
 
     public Movie(int id, int year, String name, String description, Poster poster, Rating rating) {
