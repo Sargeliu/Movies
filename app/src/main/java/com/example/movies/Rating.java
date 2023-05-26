@@ -15,4 +15,11 @@ public class Rating {
     public String getRating() {
         return rating;
     }
+
+    @Override
+    public String toString() {
+        return "Rating{" +
+                "rating='" + rating + '\'' +
+                '}';
+    }
 }
