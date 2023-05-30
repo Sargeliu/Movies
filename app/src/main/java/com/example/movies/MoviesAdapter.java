@@ -45,14 +45,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         int backgroundId;
         if (rating > 7) {
             backgroundId = R.drawable.circle_green;
-        } else if(rating > 5) {
+        } else if (rating > 5) {
             backgroundId = R.drawable.circle_orange;
         } else {
             backgroundId = R.drawable.circle_red;
         }
         Drawable background = ContextCompat.getDrawable(holder.itemView.getContext(), backgroundId);
         holder.textViewRating.setBackground(background);
-        holder.textViewRating.setText(String.valueOf(rating));
+        holder.textViewRating.setText(String.format("%.1f", rating));
     }
 
     @Override
