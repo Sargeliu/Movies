@@ -4,22 +4,22 @@ import com.google.gson.annotations.SerializedName;
 
 public class Rating {
 
-    @SerializedName("rating")
+    @SerializedName("kp")
 
-    private String rating;
+    private double kp;
 
-    public Rating(String rating) {
-        this.rating = rating;
+    public Rating(double rating) {
+        this.kp = rating;
     }
 
-    public String getRating() {
-        return rating;
+    public double getKp() {
+        return kp;
     }
 
     @Override
     public String toString() {
         return "Rating{" +
-                "rating='" + rating + '\'' +
+                "rating='" + kp + '\'' +
                 '}';
     }
 }
