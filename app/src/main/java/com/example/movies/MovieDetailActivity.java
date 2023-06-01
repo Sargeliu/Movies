@@ -22,6 +22,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         initViews();
+
+        Movie movie = (Movie) getIntent().getSerializableExtra(EXTRA_MOVIE);
     }
 
 
