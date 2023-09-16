@@ -16,7 +16,6 @@ public class Trailer implements Serializable {
         this.name = name;
     }
 
-
     public String getUrl() {
         return url;
     }

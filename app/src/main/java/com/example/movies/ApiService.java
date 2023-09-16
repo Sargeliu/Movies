@@ -10,6 +10,6 @@ public interface ApiService {
             ".kp&sortType=-1&limit=30")
     Single<MovieResponse> loadMovies(@Query("page") int page);
 
-    @GET("movie?token=6H5E8VR-C8AME3F-NT73Q1F-GRX4DZV&field=id")
-    Single<TrailerResponse> loadResponse(@Query("search") int id);
+    @GET("movie?token=6H5E8VR-C8AME3F-NT73Q1F-GRX4DZV&selectFields=videos&sortField=videos.trailers.url&field=id")
+    Single<TrailerResponse> loadTrailers(@Query("search") int id);
 }

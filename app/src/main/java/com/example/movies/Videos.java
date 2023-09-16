@@ -1,16 +1,18 @@
 package com.example.movies;
 
+import android.provider.MediaStore;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class TrailersList implements Serializable {
+public class Videos implements Serializable {
 
     @SerializedName("trailers")
     private List<Trailer> trailers;
 
-    public TrailersList(List<Trailer> trailers) {
+    public Videos(List<Trailer> trailers) {
         this.trailers = trailers;
     }
 
@@ -20,7 +22,7 @@ public class TrailersList implements Serializable {
 
     @Override
     public String toString() {
-        return "TrailersList{" +
+        return "Videos{" +
                 "trailers=" + trailers +
                 '}';
     }
