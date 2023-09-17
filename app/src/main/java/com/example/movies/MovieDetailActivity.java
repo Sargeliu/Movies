@@ -1,6 +1,8 @@
 package com.example.movies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.List;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -19,6 +23,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private static final String TAG = "MovieDetailActivity";
     private static final String EXTRA_MOVIE = "movie";
+    private MovieDetailViewModel viewModel;
 
     private ImageView imageViewPoster;
     private TextView textViewTitle;
@@ -41,20 +46,14 @@ public class MovieDetailActivity extends AppCompatActivity {
         textViewYear.setText(String.valueOf(movie.getYear()));
         textViewDescr.setText(movie.getDescription());
 
-        ApiFactory.apiService.loadTrailers(movie.getId())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<TrailerResponse>() {
-                    @Override
-                    public void accept(TrailerResponse trailerResponse) throws Throwable {
-                        Log.d(TAG, trailerResponse.toString());
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Throwable {
-                        Log.d(TAG, throwable.toString());
-                    }
-                });
+        viewModel = new ViewModelProvider(this).get(MovieDetailViewModel.class);
+        viewModel.loadTrailers(movie.getId());
+        viewModel.getTrailers().observe(this, new Observer<List<Trailer>>() {
+            @Override
+            public void onChanged(List<Trailer> trailers) {
+                Log.d(TAG, trailers.toString());
+            }
+        });
     }
 
 
