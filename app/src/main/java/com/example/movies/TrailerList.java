@@ -3,24 +3,25 @@ package com.example.movies;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class TrailerList implements Serializable {
 
-    @SerializedName("videos")
-    private Videos videos;
+    @SerializedName("trailers")
+   private List<Trailer> trailers;
 
-    public TrailerList(Videos videos) {
-        this.videos = videos;
+    public TrailerList(List<Trailer> trailers) {
+        this.trailers = trailers;
     }
 
-    public Videos getVideos() {
-        return videos;
+    public List<Trailer> getTrailers() {
+        return trailers;
     }
 
     @Override
     public String toString() {
         return "TrailerList{" +
-                "videos=" + videos +
+                "trailers=" + trailers +
                 '}';
     }
 }

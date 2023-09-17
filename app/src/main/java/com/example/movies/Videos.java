@@ -9,21 +9,21 @@ import java.util.List;
 
 public class Videos implements Serializable {
 
-    @SerializedName("trailers")
-    private List<Trailer> trailers;
+    @SerializedName("videos")
+    private TrailerList trailerList;
 
-    public Videos(List<Trailer> trailers) {
-        this.trailers = trailers;
+    public Videos(TrailerList trailerList) {
+        this.trailerList = trailerList;
     }
 
-    public List<Trailer> getTrailers() {
-        return trailers;
+    public TrailerList getTrailerList() {
+        return trailerList;
     }
 
     @Override
     public String toString() {
         return "Videos{" +
-                "trailers=" + trailers +
+                "trailerList=" + trailerList +
                 '}';
     }
 }

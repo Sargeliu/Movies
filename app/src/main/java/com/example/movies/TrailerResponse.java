@@ -8,20 +8,20 @@ import java.util.List;
 public class TrailerResponse implements Serializable {
 
     @SerializedName("docs")
-    private List<TrailerList> trailerLists;
+    private Videos videos;
 
-    public TrailerResponse(List<TrailerList> trailerLists) {
-        this.trailerLists = trailerLists;
+    public TrailerResponse(Videos videos) {
+        this.videos = videos;
     }
 
-    public List<TrailerList> getTrailerLists() {
-        return trailerLists;
+    public Videos getVideos() {
+        return videos;
     }
 
     @Override
     public String toString() {
         return "TrailerResponse{" +
-                "trailerLists=" + trailerLists +
+                "videos=" + videos +
                 '}';
     }
 }
