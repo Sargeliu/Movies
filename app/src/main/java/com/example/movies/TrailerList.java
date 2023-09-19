@@ -7,21 +7,21 @@ import java.util.List;
 
 public class TrailerList implements Serializable {
 
-    @SerializedName("trailers")
-   private List<Trailer> trailers;
+    @SerializedName("videos")
+    private Videos videos;
 
-    public TrailerList(List<Trailer> trailers) {
-        this.trailers = trailers;
+    public TrailerList(Videos videos) {
+        this.videos = videos;
     }
 
-    public List<Trailer> getTrailers() {
-        return trailers;
+    public Videos getVideos() {
+        return videos;
     }
 
     @Override
     public String toString() {
         return "TrailerList{" +
-                "trailers=" + trailers +
+                "videos=" + videos +
                 '}';
     }
 }

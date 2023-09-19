@@ -41,16 +41,15 @@ public class MovieDetailViewModel extends AndroidViewModel {
         Disposable disposable = ApiFactory.apiService.loadTrailers(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Function<TrailerResponse, List<Trailer>>() {
+                .subscribe(new Consumer<TrailerResponse>() {
                     @Override
-                    public List<Trailer> apply(TrailerResponse trailerResponse) throws Throwable {
-                        return trailerResponse.getVideos().getTrailerList().getTrailers();
+                    public void accept(TrailerResponse trailerResponse) throws Throwable {
+                        Log.d(TAG, trailerResponse.toString());
                     }
-                })
-                .subscribe(new Consumer<List<Trailer>>() {
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void accept(List<Trailer> trailerList) throws Throwable {
-                        trailers.setValue(trailerList);
+                    public void accept(Throwable throwable) throws Throwable {
+                        Log.d(TAG, throwable.toString());
                     }
                 });
         compositeDisposable.add(disposable);
