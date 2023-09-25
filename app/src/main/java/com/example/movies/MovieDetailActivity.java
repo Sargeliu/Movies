@@ -68,6 +68,13 @@ public class MovieDetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        viewModel.getReviews().observe(this, new Observer<List<Review>>() {
+            @Override
+            public void onChanged(List<Review> reviewList) {
+                Log.d(TAG, reviewList.toString());
+            }
+        });
+        viewModel.loadReviews(movie.getId());
     }
 
 
