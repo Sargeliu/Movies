@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="8dp"
-    app:cardUseCompatPadding="true"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="4dp">
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardUseCompatPadding="true">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutReview"
         android:layout_width="match_parent"
-        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
         android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:padding="8dp"
+        tools:background="@android:color/holo_red_light">
 
         <TextView
             android:id="@+id/textViewAuthor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Автор" />
+            android:layout_margin="8dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            tools:text="Author" />
+
+        <TextView
+            android:id="@+id/textViewReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="@color/white"
+            tools:text="Description" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

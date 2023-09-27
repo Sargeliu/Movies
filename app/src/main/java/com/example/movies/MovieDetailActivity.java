@@ -27,7 +27,9 @@ public class MovieDetailActivity extends AppCompatActivity {
     private static final String EXTRA_MOVIE = "movie";
     private MovieDetailViewModel viewModel;
     private RecyclerView recyclerViewTrailers;
+    private RecyclerView recyclerViewReviews;
     private TrailersAdapter trailersAdapter;
+    private ReviewsAdapter reviewsAdapter;
 
     private ImageView imageViewPoster;
     private TextView textViewTitle;
@@ -38,13 +40,16 @@ public class MovieDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
         initViews();
+
         trailersAdapter = new TrailersAdapter();
+        reviewsAdapter = new ReviewsAdapter();
         recyclerViewTrailers.setAdapter(trailersAdapter);
+        recyclerViewReviews.setAdapter(reviewsAdapter);
 
         Movie movie = (Movie) getIntent().getSerializableExtra(EXTRA_MOVIE);
 
-        assert movie != null;
         Glide.with(this)
                 .load(movie.getPoster().getUrl())
                 .into(imageViewPoster);
@@ -57,7 +62,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         viewModel.getTrailers().observe(this, new Observer<List<Trailer>>() {
             @Override
             public void onChanged(List<Trailer> trailers) {
-                trailersAdapter.setTrailers(trailers);
+                Log.d(TAG, trailers.toString());
             }
         });
         trailersAdapter.setOnTrailerClickListener(new TrailersAdapter.OnTrailerClickListener() {
@@ -71,7 +76,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         viewModel.getReviews().observe(this, new Observer<List<Review>>() {
             @Override
             public void onChanged(List<Review> reviewList) {
-                Log.d(TAG, reviewList.toString());
+                reviewsAdapter.setReviews(reviewList);
             }
         });
         viewModel.loadReviews(movie.getId());
@@ -84,6 +89,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         textViewYear = findViewById(R.id.textViewYear);
         textViewDescr = findViewById(R.id.textViewDescr);
         recyclerViewTrailers = findViewById(R.id.recyclerViewTrailers);
+        recyclerViewReviews = findViewById(R.id.recyclerViewReviews);
     }
 
     public static Intent newIntent(Context context, Movie movie) {

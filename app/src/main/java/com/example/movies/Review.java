@@ -12,13 +12,10 @@ public class Review implements Serializable {
 	@SerializedName("author")
 	private String author;
 
-	@SerializedName("type")
-	private String type;
 
-	public Review(String review, String author, String type) {
+	public Review(String review, String author) {
 		this.review = review;
 		this.author = author;
-		this.type = type;
 	}
 
 	public String getReview(){
@@ -29,16 +26,13 @@ public class Review implements Serializable {
 		return author;
 	}
 
-	public String getType(){
-		return type;
-	}
+
 
 	@Override
 	public String toString() {
 		return "Review{" +
 				"review='" + review + '\'' +
 				", author='" + author + '\'' +
-				", type='" + type + '\'' +
 				'}';
 	}
 }
