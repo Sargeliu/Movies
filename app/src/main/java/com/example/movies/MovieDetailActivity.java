@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Entity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -80,6 +81,13 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
         viewModel.loadReviews(movie.getId());
+
+        MovieDao movieDao = MovieDataBase.getInstance(getApplication())
+                .movieDao();
+        movieDao.insertMovie(movie)
+                .subscribeOn(Schedulers.io())
+                .subscribe();
+
     }
 
 

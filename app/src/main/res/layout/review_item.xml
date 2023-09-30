@@ -15,7 +15,7 @@
         android:alpha="0.8"
         android:orientation="vertical"
         android:padding="8dp"
-        tools:background="@android:color/holo_red_light">
+        android:background="@android:color/holo_red_light" >
 
         <TextView
             android:id="@+id/textViewAuthor"

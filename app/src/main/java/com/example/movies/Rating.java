@@ -10,8 +10,8 @@ public class Rating implements Serializable {
 
     private double kp;
 
-    public Rating(double rating) {
-        this.kp = rating;
+    public Rating(double kp) {
+        this.kp = kp;
     }
 
     public double getKp() {
