@@ -1,6 +1,7 @@
 package com.example.movies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,9 +9,11 @@ import androidx.room.Entity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +36,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ReviewsAdapter reviewsAdapter;
 
     private ImageView imageViewPoster;
+    private ImageView imageViewStar;
     private TextView textViewTitle;
     private TextView textViewYear;
     private TextView textViewDescr;
@@ -82,11 +86,33 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
         viewModel.loadReviews(movie.getId());
 
-        MovieDao movieDao = MovieDataBase.getInstance(getApplication())
-                .movieDao();
-        movieDao.insertMovie(movie)
-                .subscribeOn(Schedulers.io())
-                .subscribe();
+        Drawable startOff = ContextCompat.getDrawable(MovieDetailActivity.this,
+                android.R.drawable.star_big_off);
+        Drawable startOn = ContextCompat.getDrawable(MovieDetailActivity.this,
+                android.R.drawable.star_big_on);
+
+        viewModel.getFavouriteMovie(movie.getId()).observe(this, new Observer<Movie>() {
+            @Override
+            public void onChanged(Movie movieFromDb) {
+                if (movieFromDb == null) {
+                    imageViewStar.setImageDrawable(startOff);
+                    imageViewStar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            viewModel.insertMovie(movie);
+                        }
+                    });
+                } else {
+                    imageViewStar.setImageDrawable(startOn);
+                    imageViewStar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            viewModel.removeMovie(movie.getId());
+                        }
+                    });
+                }
+            }
+        });
 
     }
 
@@ -98,6 +124,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         textViewDescr = findViewById(R.id.textViewDescr);
         recyclerViewTrailers = findViewById(R.id.recyclerViewTrailers);
         recyclerViewReviews = findViewById(R.id.recyclerViewReviews);
+        imageViewStar = findViewById(R.id.imageViewStar);
     }
 
     public static Intent newIntent(Context context, Movie movie) {
