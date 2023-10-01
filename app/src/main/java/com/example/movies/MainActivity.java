@@ -1,5 +1,6 @@
 package com.example.movies;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,6 +11,8 @@ import androidx.room.Insert;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -68,5 +71,21 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         progressBar = findViewById(R.id.progressBar);
         recyclerViewMovies = findViewById(R.id.recyclerViewMovies);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.itemFavourite) {
+            Intent intent = FavouriteMoviesActivity.newIntent(this);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
