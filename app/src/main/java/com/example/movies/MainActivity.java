@@ -27,11 +27,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        Intent intent = FavouriteMoviesActivity.newIntent(this);
-        startActivity(intent);
-
-
         initViews();
         moviesAdapter = new MoviesAdapter();
 
